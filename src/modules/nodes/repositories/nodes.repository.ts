@@ -6,6 +6,7 @@ import { TransactionHost } from '@nestjs-cls/transactional';
 import { Injectable } from '@nestjs/common';
 
 import { getKyselyUuid } from '@common/helpers/kysely/get-kysely-uuid';
+import { values } from '@common/helpers/kysely/values';
 import { TxKyselyService } from '@common/database';
 import { ICrud } from '@common/types/crud-port';
 
@@ -200,14 +201,22 @@ export class NodesRepository implements ICrud<NodesEntity> {
     }
 
     public async reorderMany(dto: IReorderNode[]): Promise<boolean> {
-        await this.prisma.withTransaction(async () => {
-            for (const { uuid, viewPosition } of dto) {
-                await this.prisma.tx.nodes.updateMany({
-                    where: { uuid },
-                    data: { viewPosition },
-                });
-            }
-        });
+        if (dto.length === 0) return true;
+
+        const v = values(
+            dto.map(({ uuid, viewPosition }) => ({
+                uuid: sql<string>`${uuid}::uuid`,
+                viewPosition: sql<number>`${viewPosition}::int`,
+            })),
+            'v',
+        );
+
+        await this.qb.kysely
+            .updateTable('nodes as n')
+            .from(v)
+            .set((eb) => ({ viewPosition: eb.ref('v.viewPosition') }))
+            .whereRef('n.uuid', '=', 'v.uuid')
+            .execute();
 
         await this.prisma.tx
             .$executeRaw`SELECT setval('nodes_view_position_seq', (SELECT MAX(view_position) FROM nodes) + 1)`;
