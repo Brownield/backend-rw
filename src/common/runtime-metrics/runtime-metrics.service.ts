@@ -48,14 +48,17 @@ export class RuntimeMetricsService implements OnModuleDestroy, OnModuleInit {
     private collect(): RuntimeMetric {
         const mem = process.memoryUsage();
 
+        const toMs = (ns: number) =>
+            Number.isFinite(ns) ? Math.max(0, ns / 1e6 - this.RESOLUTION_MS) : 0;
+
         return {
             rss: mem.rss,
             heapUsed: mem.heapUsed,
             heapTotal: mem.heapTotal,
             external: mem.external,
             arrayBuffers: mem.arrayBuffers,
-            eventLoopDelayMs: Math.max(0, this.eld.mean / 1e6 - this.RESOLUTION_MS),
-            eventLoopP99Ms: Math.max(0, this.eld.percentile(99) / 1e6 - this.RESOLUTION_MS),
+            eventLoopDelayMs: toMs(this.eld.mean),
+            eventLoopP99Ms: toMs(this.eld.percentile(99)),
             activeHandles: process.getActiveResourcesInfo().length,
             uptime: process.uptime(),
             pid: process.pid,
