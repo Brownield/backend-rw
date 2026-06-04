@@ -9,6 +9,7 @@ export const NodesSchema = z.object({
     name: z.string(),
     address: z.string(),
     port: z.nullable(z.number().int()),
+    proxyUrl: z.nullable(z.string()),
     isConnected: z.boolean(),
     isDisabled: z.boolean(),
     isConnecting: z.boolean(),

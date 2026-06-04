@@ -22,6 +22,14 @@ export namespace CreateNodeCommand {
             .min(1, 'Port is required')
             .max(65535, 'Port must be less than 65535')
             .optional(),
+        proxyUrl: z
+            .string()
+            .regex(
+                /^socks5:\/\/(?:[^:@/\s]+(?::[^@/\s]*)?@)?[^:@/\s]+:\d{1,5}$/,
+                'Expected socks5://[user:pass@]host:port',
+            )
+            .nullable()
+            .optional(),
         isTrafficTrackingActive: z.boolean().optional().default(false),
         trafficLimitBytes: z.optional(z.number().min(0, 'Traffic limit must be greater than 0')),
         notifyPercent: z.optional(

@@ -11,6 +11,7 @@ export class NodeResponseModel {
     public name: string;
     public address: string;
     public port: null | number;
+    public proxyUrl: string | null;
     public isConnected: boolean;
     public isConnecting: boolean;
     public isDisabled: boolean;
@@ -47,6 +48,7 @@ export class NodeResponseModel {
         this.name = data.name;
         this.address = data.address;
         this.port = data.port;
+        this.proxyUrl = data.proxyUrl;
         this.isConnected = data.isConnected;
         this.isConnecting = data.isConnecting;
         this.isDisabled = data.isDisabled;
