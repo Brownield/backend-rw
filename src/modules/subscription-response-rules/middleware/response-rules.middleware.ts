@@ -113,6 +113,10 @@ export class ResponseRulesMiddleware implements NestMiddleware {
                 if (mods.ignoreServeJsonAtBaseSubscription) {
                     ssrContext.ignoreServeJsonAtBaseSubscription = true;
                 }
+
+                if (mods.disableHwidCheck) {
+                    ssrContext.disableHwidCheck = true;
+                }
             }
 
             switch (ssrContext.matchedResponseType) {

@@ -108,6 +108,15 @@ export const ResponseRuleModificationsSchema = z
                         '**Example:** `["^MyClient/", "^CustomApp\\\\/v2"]`',
                 }),
             ),
+        disableHwidCheck: z
+            .boolean()
+            .optional()
+            .describe(
+                JSON.stringify({
+                    markdownDescription:
+                        'If you set this flag to **true**, the HWID check will be disabled. **This modification have higher priority than settings from Subscription Settings.**',
+                }),
+            ),
     })
     .optional()
     .describe(
