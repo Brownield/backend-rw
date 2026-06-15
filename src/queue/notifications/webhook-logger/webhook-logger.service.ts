@@ -40,6 +40,10 @@ export class WebhookLoggerQueueService
     }
 
     public async sendWebhooks(payload: IBaseWebhookLogger, webhookUrls: string[]) {
+        if (webhookUrls.length === 0) {
+            return;
+        }
+
         return this.addBulk(
             webhookUrls.map((url) => ({
                 name: WebhookLoggerJobNames.sendWebhook,
