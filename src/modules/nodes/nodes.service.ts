@@ -208,7 +208,7 @@ export class NodesService {
     }
 
     public async restartAllNodes(
-        forceRestart?: boolean,
+        forceRestart: boolean,
     ): Promise<TResult<RestartNodeResponseModel>> {
         try {
             const nodes = await this.nodesRepository.findByCriteria({
@@ -220,7 +220,7 @@ export class NodesService {
 
             await this.nodesQueuesService.startAllNodes({
                 emitter: NodesService.name,
-                force: forceRestart ?? false,
+                force: forceRestart,
             });
 
             return ok(new RestartNodeResponseModel(true));
