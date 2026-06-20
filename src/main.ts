@@ -88,6 +88,7 @@ async function bootstrap(): Promise<void> {
                 directives: {
                     'script-src': ["'self'", "'wasm-unsafe-eval'"],
                     'img-src': ["'self'", 'data:', 'https:'],
+                    'connect-src': ["'self'", 'https://raw.githubusercontent.com'],
                 },
             },
         }),
