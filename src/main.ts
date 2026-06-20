@@ -81,7 +81,17 @@ async function bootstrap(): Promise<void> {
 
     const config = app.get(TypedConfigService);
 
-    app.use(helmet());
+    app.use(
+        helmet({
+            contentSecurityPolicy: {
+                useDefaults: true,
+                directives: {
+                    'script-src': ["'self'", "'wasm-unsafe-eval'"],
+                    'img-src': ["'self'", 'data:', 'https:'],
+                },
+            },
+        }),
+    );
 
     app.use(compression());
 
