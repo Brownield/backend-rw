@@ -56,12 +56,13 @@ const USERS_FILTER_COLUMN_MAP = {
     'userTraffic.lifetimeUsedTrafficBytes': sql.ref('user_traffic.lifetime_used_traffic_bytes'),
     usedTrafficBytes: sql.ref('user_traffic.used_traffic_bytes'),
     hwidDeviceLimit: sql.ref('users.hwid_device_limit'),
+    trafficLimitBytes: sql.ref('users.traffic_limit_bytes'),
 
     activeInternalSquads: null,
     nodeName: null,
 } as const;
 
-const NUMERIC_FILTER_IDS = new Set(['hwidDeviceLimit', 'tId']);
+const NUMERIC_FILTER_IDS = new Set(['hwidDeviceLimit', 'tId', 'trafficLimitBytes']);
 
 type AllowedUsersFilterId = keyof typeof USERS_FILTER_COLUMN_MAP;
 
@@ -354,9 +355,14 @@ export class UsersRepository {
                     qb = qb.where(col, '<=', value);
                     break;
                 case 'between': {
-                    const [from, to] = filter.value as [string, string];
+                    const [from, to] = filter.value as [string | null, string | null];
                     const castFn = NUMERIC_FILTER_IDS.has(filter.id) ? Number : (v: string) => v;
-                    qb = qb.where(col, '>=', castFn(from)).where(col, '<=', castFn(to));
+                    if (from !== null && from !== undefined && from !== '') {
+                        qb = qb.where(col, '>=', castFn(from));
+                    }
+                    if (to !== null && to !== undefined && to !== '') {
+                        qb = qb.where(col, '<=', castFn(to));
+                    }
                     break;
                 }
                 default:
