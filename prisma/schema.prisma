@@ -483,13 +483,16 @@ model InfraProviders {
 }
 
 model InfraBillingNodes {
-  uuid          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  nodeUuid      String   @map("node_uuid") @db.Uuid
-  providerUuid  String   @map("provider_uuid") @db.Uuid
+  uuid     String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nodeUuid String? @map("node_uuid") @db.Uuid
+  name     String? @map("name")
+
+  providerUuid String @map("provider_uuid") @db.Uuid
+
   nextBillingAt DateTime @map("next_billing_at")
 
   provider InfraProviders @relation(fields: [providerUuid], references: [uuid], onDelete: Cascade)
-  node     Nodes          @relation(fields: [nodeUuid], references: [uuid], onDelete: Cascade)
+  node     Nodes?         @relation(fields: [nodeUuid], references: [uuid], onDelete: Cascade)
 
   createdAt DateTime @default(dbgenerated("now()")) @map("created_at")
   updatedAt DateTime @default(dbgenerated("now()")) @updatedAt @map("updated_at")

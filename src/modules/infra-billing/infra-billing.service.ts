@@ -200,6 +200,10 @@ export class InfraBillingService {
         dto: CreateInfraBillingNodeRequestDto,
     ): Promise<TResult<GetBillingNodesResponseModel>> {
         try {
+            if (!dto.nodeUuid && !dto.name) {
+                return fail(ERRORS.CREATE_INFRA_BILLING_NODE_MISSING_TARGET);
+            }
+
             await this.infraBillingNodeRepository.create(new InfraBillingNodeEntity(dto));
 
             return await this.getBillingNodes();

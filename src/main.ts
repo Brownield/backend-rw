@@ -80,22 +80,24 @@ async function bootstrap(): Promise<void> {
 
     const config = app.get(TypedConfigService);
 
-    app.use(
-        helmet({
-            contentSecurityPolicy: {
-                useDefaults: true,
-                directives: {
-                    'script-src': ["'self'", "'wasm-unsafe-eval'"],
-                    'img-src': ["'self'", 'data:', 'https:'],
-                    'connect-src': [
-                        "'self'",
-                        'https://raw.githubusercontent.com',
-                        'https://ungh.cc',
-                    ],
+    if (!isDevelopment()) {
+        app.use(
+            helmet({
+                contentSecurityPolicy: {
+                    useDefaults: true,
+                    directives: {
+                        'script-src': ["'self'", "'wasm-unsafe-eval'"],
+                        'img-src': ["'self'", 'data:', 'https:'],
+                        'connect-src': [
+                            "'self'",
+                            'https://raw.githubusercontent.com',
+                            'https://ungh.cc',
+                        ],
+                    },
                 },
-            },
-        }),
-    );
+            }),
+        );
+    }
 
     app.use(compression());
 

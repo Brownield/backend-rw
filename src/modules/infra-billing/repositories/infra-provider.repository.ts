@@ -104,8 +104,13 @@ export class InfraProviderRepository implements ICrud<InfraProviderEntity> {
                     jsonArrayFrom(
                         eb
                             .selectFrom('infraBillingNodes as ibn')
-                            .innerJoin('nodes as n', 'ibn.nodeUuid', 'n.uuid')
-                            .select(['ibn.nodeUuid', 'n.name', 'n.countryCode'])
+                            .leftJoin('nodes as n', 'ibn.nodeUuid', 'n.uuid')
+                            .select(['ibn.nodeUuid', 'n.countryCode'])
+                            .select((sb) =>
+                                sql<string>`coalesce(${sb.ref('n.name')}, ${sb.ref('ibn.name')})`.as(
+                                    'name',
+                                ),
+                            )
                             .where('ibn.providerUuid', '=', eb.ref('ip.uuid'))
                             .orderBy('n.viewPosition', 'asc'),
                     ).as('billingNodes'),
@@ -147,8 +152,13 @@ export class InfraProviderRepository implements ICrud<InfraProviderEntity> {
                     jsonArrayFrom(
                         eb
                             .selectFrom('infraBillingNodes as ibn')
-                            .innerJoin('nodes as n', 'ibn.nodeUuid', 'n.uuid')
-                            .select(['ibn.nodeUuid', 'n.name', 'n.countryCode'])
+                            .leftJoin('nodes as n', 'ibn.nodeUuid', 'n.uuid')
+                            .select(['ibn.nodeUuid', 'n.countryCode'])
+                            .select((sb) =>
+                                sql<string>`coalesce(${sb.ref('n.name')}, ${sb.ref('ibn.name')})`.as(
+                                    'name',
+                                ),
+                            )
                             .where('ibn.providerUuid', '=', eb.ref('ip.uuid'))
                             .orderBy('n.viewPosition', 'asc'),
                     ).as('billingNodes'),

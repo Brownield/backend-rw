@@ -195,10 +195,10 @@ export class InfraBillingNodeRepository implements ICrud<InfraBillingNodeEntity>
 
         const result = await this.qb.kysely
             .selectFrom('infraBillingNodes as ibn')
-            .innerJoin('nodes as n', 'n.uuid', 'ibn.nodeUuid')
+            .leftJoin('nodes as n', 'n.uuid', 'ibn.nodeUuid')
             .innerJoin('infraProviders as ip', 'ip.uuid', 'ibn.providerUuid')
-            .select([
-                'n.name as nodeName',
+            .select((eb) => [
+                sql<string>`coalesce(${eb.ref('n.name')}, ${eb.ref('ibn.name')})`.as('nodeName'),
                 'ip.loginUrl',
                 'ip.name as providerName',
                 'ibn.nextBillingAt',

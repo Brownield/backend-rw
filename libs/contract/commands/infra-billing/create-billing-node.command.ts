@@ -17,14 +17,14 @@ export namespace CreateInfraBillingNodeCommand {
 
     export const RequestSchema = z.object({
         providerUuid: z.string().uuid(),
-        nodeUuid: z.string().uuid(),
+        nodeUuid: z.string().uuid().nullable(),
+        name: z.string().min(1).max(255).nullable(),
         nextBillingAt: z
             .string({
                 invalid_type_error: 'Invalid date format',
             })
             .datetime({ message: 'Invalid date format', offset: true, local: true })
             .transform((str) => new Date(str))
-            .optional()
             .describe('Next billing date. Format: 2025-01-17T15:38:45.065Z'),
     });
 
