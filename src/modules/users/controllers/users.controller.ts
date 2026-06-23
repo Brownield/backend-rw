@@ -33,6 +33,7 @@ import {
     GetUserByTelegramIdCommand,
     GetUserByUsernameCommand,
     GetUserByUuidCommand,
+    GetUsersStreamCommand,
     GetUserSubscriptionRequestHistoryCommand,
     ResetUserTrafficCommand,
     ResolveUserCommand,
@@ -66,6 +67,8 @@ import {
     GetUserByUsernameResponseDto,
     GetUserByUuidRequestDto,
     GetUserByUuidResponseDto,
+    GetUsersStreamQueryDto,
+    GetUsersStreamResponseDto,
     GetUserSubscriptionRequestHistoryRequestDto,
     GetUserSubscriptionRequestHistoryResponseDto,
     ResetUserTrafficRequestDto,
@@ -79,14 +82,15 @@ import {
     UpdateUserResponseDto,
 } from '../dtos';
 import {
-    GetUserByTelegramIdRequestDto,
-    GetUserByTelegramIdResponseDto,
-} from '../dtos/get-user-by-telegram-id.dto';
-import {
     GetAllTagsResponseModel,
     GetAllUsersResponseModel,
     GetFullUserResponseModel,
+    GetUsersStreamResponseModel,
 } from '../models';
+import {
+    GetUserByTelegramIdRequestDto,
+    GetUserByTelegramIdResponseDto,
+} from '../dtos/get-user-by-telegram-id.dto';
 import { GetUserByEmailResponseDto } from '../dtos/get-user-by-email.dto';
 import { GetUserByEmailRequestDto } from '../dtos/get-user-by-email.dto';
 import { UsersService } from '../users.service';
@@ -203,6 +207,45 @@ export class UsersController {
                 users: data.users.map(
                     (item) => new GetFullUserResponseModel(item, this.subPublicDomain),
                 ),
+            }),
+        };
+    }
+
+    @ApiOkResponse({
+        type: GetUsersStreamResponseDto,
+        description: 'Users fetched successfully',
+    })
+    @ApiQuery({
+        name: 'cursor',
+        type: 'string',
+        required: false,
+        description: 'Cursor from the previous response (nextCursor). Omit on the first request',
+    })
+    @ApiQuery({
+        name: 'size',
+        type: 'number',
+        required: false,
+        description: 'Page size, no more than 1000 (default 250)',
+    })
+    @Endpoint({
+        command: GetUsersStreamCommand,
+        httpCode: HttpStatus.OK,
+    })
+    async getUsersStream(
+        @Query() query: GetUsersStreamQueryDto,
+    ): Promise<GetUsersStreamResponseDto> {
+        const { cursor, size } = query;
+
+        const result = await this.usersService.getUsersStream({ cursor, size });
+
+        const data = errorHandler(result);
+        return {
+            response: new GetUsersStreamResponseModel({
+                users: data.users.map(
+                    (item) => new GetFullUserResponseModel(item, this.subPublicDomain),
+                ),
+                nextCursor: data.nextCursor,
+                hasMore: data.hasMore,
             }),
         };
     }

@@ -8,10 +8,15 @@ export namespace GetAllUsersCommand {
     export const url = REST_API.USERS.GET;
     export const TSQ_url = url;
 
-    export const endpointDetails = getEndpointDetails(USERS_ROUTES.GET, 'get', 'Get all users', {
-        scope: 'list',
-        kind: 'read',
-    });
+    export const endpointDetails = getEndpointDetails(
+        USERS_ROUTES.GET,
+        'get',
+        'Get all users using offset-based pagination',
+        {
+            scope: 'list',
+            kind: 'read',
+        },
+    );
 
     export const RequestQuerySchema = TanstackQueryRequestQuerySchema;
 

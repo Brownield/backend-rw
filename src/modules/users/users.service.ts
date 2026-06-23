@@ -10,8 +10,8 @@ import { EventBus, QueryBus } from '@nestjs/cqrs';
 import { mapDefined, wrapBigInt, wrapBigIntNullable } from '@common/utils';
 import { TypedConfigService } from '@common/config/app-config';
 import { fail, ok, TResult } from '@common/types';
+import { GetAllUsersCommand, GetUsersStreamCommand } from '@libs/contracts/commands';
 import { ERRORS, USERS_STATUS, EVENTS } from '@libs/contracts/constants';
-import { GetAllUsersCommand } from '@libs/contracts/commands';
 
 import { UserEvent } from '@integration-modules/notifications/interfaces';
 
@@ -259,6 +259,23 @@ export class UsersService {
             const [users, total] = await this.userRepository.getAllUsers(dto);
 
             return ok({ users, total });
+        } catch (error) {
+            this.logger.error(error);
+            return fail(ERRORS.GET_ALL_USERS_ERROR);
+        }
+    }
+
+    public async getUsersStream(dto: GetUsersStreamCommand.RequestQuery): Promise<
+        TResult<{
+            users: UserEntity[];
+            nextCursor: string | null;
+            hasMore: boolean;
+        }>
+    > {
+        try {
+            const result = await this.userRepository.getUsersStream(dto);
+
+            return ok(result);
         } catch (error) {
             this.logger.error(error);
             return fail(ERRORS.GET_ALL_USERS_ERROR);

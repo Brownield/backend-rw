@@ -12,7 +12,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { formatExecutionTime, getTime } from '@common/utils/get-elapsed-time';
 import { getKyselyUuid, paginateQuery } from '@common/helpers/kysely';
 import { TxKyselyService } from '@common/database/tx-kysely.service';
-import { GetAllUsersCommand } from '@libs/contracts/commands';
+import { GetAllUsersCommand, GetUsersStreamCommand } from '@libs/contracts/commands';
 
 import { ConfigProfileInboundEntity } from '@modules/config-profiles/entities';
 
@@ -241,6 +241,34 @@ export class UsersRepository {
         const { rows, count } = await paginateQuery(qb, { offset: start, limit: size });
 
         return [rows.map((u) => new UserEntity(u)), count];
+    }
+
+    public async getUsersStream({ cursor, size }: GetUsersStreamCommand.RequestQuery): Promise<{
+        users: UserEntity[];
+        nextCursor: string | null;
+        hasMore: boolean;
+    }> {
+        let qb = this.baseUsersQb.selectAll().select((eb) => this.includeActiveInternalSquads(eb));
+
+        if (cursor) {
+            qb = qb.where('users.tId', '>', BigInt(cursor));
+        }
+
+        const rows = await qb
+            .orderBy('users.tId', 'asc')
+            .limit(size + 1)
+            .execute();
+
+        const hasMore = rows.length > size;
+        if (hasMore) {
+            rows.pop();
+        }
+
+        return {
+            users: rows.map((u) => new UserEntity(u)),
+            nextCursor: hasMore ? rows[rows.length - 1].tId.toString() : null,
+            hasMore,
+        };
     }
 
     private applyUsersFilters(
