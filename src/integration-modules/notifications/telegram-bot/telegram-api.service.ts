@@ -4,6 +4,8 @@ import { ProxyAgent } from 'proxy-agent';
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
+import { isProcessor } from '@common/utils/startup-app';
+
 import { IInlineKeyboard } from '@queue/notifications/telegram-bot-logger/interfaces';
 
 import { TelegramApiError } from './telegram-api.error';
@@ -34,6 +36,7 @@ export class TelegramApiService implements OnModuleInit {
     }
 
     async onModuleInit(): Promise<void> {
+        if (!isProcessor()) return;
         this.isHealthy = await this.healthcheck();
         if (!this.isHealthy) this.logger.error('Telegram API is not healthy.');
     }

@@ -6,7 +6,7 @@ import { BullModule } from '@nestjs/bullmq';
 import { CqrsModule } from '@nestjs/cqrs';
 import { Module } from '@nestjs/common';
 
-import { isProcessor, useBullBoard, useQueueProcessor } from '@common/utils/startup-app';
+import { useBullBoard, useQueueProcessor } from '@common/utils/startup-app';
 
 import { TelegramBotModule } from '@integration-modules/notifications/telegram-bot/telegram-bot.module';
 
@@ -16,11 +16,7 @@ import { QUEUES_NAMES } from '../../queue.enum';
 
 const requiredModules = [
     CqrsModule,
-    ConditionalModule.registerWhen(
-        TelegramBotModule,
-        (env) =>
-            env['IS_TELEGRAM_NOTIFICATIONS_ENABLED']?.toLowerCase() !== 'false' && isProcessor(),
-    ),
+    ConditionalModule.registerWhen(TelegramBotModule, 'IS_TELEGRAM_NOTIFICATIONS_ENABLED'),
 ];
 
 const processors = [TelegramBotLoggerQueueProcessor];
