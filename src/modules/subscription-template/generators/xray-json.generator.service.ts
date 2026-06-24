@@ -284,7 +284,11 @@ export class XrayJsonGeneratorService {
         };
 
         if (isNonEmptyObject(host.mux)) {
-            outbound.mux = host.mux;
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { smux: _, ...mux } = host.mux;
+            if (Object.keys(mux).length > 0) {
+                outbound.mux = mux;
+            }
         }
 
         return outbound;
