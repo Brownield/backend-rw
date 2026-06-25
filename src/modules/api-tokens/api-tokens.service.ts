@@ -9,16 +9,16 @@ import { RawCacheService } from '@common/raw-cache';
 import { fail, ok, TResult } from '@common/types';
 import { ERRORS } from '@libs/contracts/constants';
 
+import { SignApiTokenCommand } from '../auth/commands/sign-api-token/sign-api-token.command';
+import { ApiTokenEntity } from './entities/api-token.entity';
 import {
     IApiTokenDeleteResponse,
     ICreateApiTokenRequest,
     IGroupedScopeCatalog,
 } from './interfaces';
-import { SignApiTokenCommand } from '../auth/commands/sign-api-token/sign-api-token.command';
-import { ApiTokensRepository } from './repositories/api-tokens.repository';
 import { FindAllApiTokensResponseModel } from './models/find.model';
+import { ApiTokensRepository } from './repositories/api-tokens.repository';
 import { ScopeCatalogService } from './scope-catalog.service';
-import { ApiTokenEntity } from './entities/api-token.entity';
 
 @Injectable()
 export class ApiTokensService {

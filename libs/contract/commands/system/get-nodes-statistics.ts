@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { getEndpointDetails } from '../../constants';
 import { REST_API, SYSTEM_ROUTES } from '../../api';
+import { getEndpointDetails } from '../../constants';
 
 export namespace GetNodesStatisticsCommand {
     export const url = REST_API.SYSTEM.STATS.NODES_STATS;

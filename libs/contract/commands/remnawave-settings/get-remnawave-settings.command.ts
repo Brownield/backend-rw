@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 import { REMNAAWAVE_SETTINGS_ROUTES, REST_API } from '../../api';
-import { RemnawaveSettingsSchema } from '../../models';
 import { getEndpointDetails } from '../../constants';
+import { RemnawaveSettingsSchema } from '../../models';
 
 export namespace GetRemnawaveSettingsCommand {
     export const url = REST_API.REMNAAWAVE_SETTINGS.GET;

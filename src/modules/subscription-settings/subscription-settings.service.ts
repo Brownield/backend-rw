@@ -6,9 +6,9 @@ import { CACHE_KEYS, ERRORS } from '@libs/contracts/constants';
 
 import { ResponseRulesParserService } from '@modules/subscription-response-rules/services/response-rules-parser.service';
 
-import { SubscriptionSettingsRepository } from './repositories/subscription-settings.repository';
-import { SubscriptionSettingsEntity } from './entities/subscription-settings.entity';
 import { UpdateSubscriptionSettingsRequestDto } from './dtos';
+import { SubscriptionSettingsEntity } from './entities/subscription-settings.entity';
+import { SubscriptionSettingsRepository } from './repositories/subscription-settings.repository';
 
 @Injectable()
 export class SubscriptionSettingsService {

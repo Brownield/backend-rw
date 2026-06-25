@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
+import { HWID_ROUTES, REST_API } from '../../api';
 import { getEndpointDetails } from '../../constants';
 import { HwidUserDeviceSchema } from '../../models';
-import { HWID_ROUTES, REST_API } from '../../api';
 
 export namespace CreateUserHwidDeviceCommand {
     export const url = REST_API.HWID.CREATE_USER_HWID_DEVICE;

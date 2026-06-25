@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { getEndpointDetails } from '../../../constants';
 import { REST_API, USERS_ROUTES } from '../../../api';
+import { getEndpointDetails } from '../../../constants';
 
 export namespace BulkExtendExpirationDateCommand {
     export const url = REST_API.USERS.BULK.EXTEND_EXPIRATION_DATE;

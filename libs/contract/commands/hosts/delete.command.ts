@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { getEndpointDetails } from '../../constants';
 import { HOSTS_ROUTES, REST_API } from '../../api';
+import { getEndpointDetails } from '../../constants';
 
 export namespace DeleteHostCommand {
     export const url = REST_API.HOSTS.DELETE;

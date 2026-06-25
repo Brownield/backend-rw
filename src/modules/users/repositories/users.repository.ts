@@ -1,21 +1,29 @@
+import { TResetPeriods, TUsersStatus, USERS_STATUS } from '@contract/constants';
+import { Transactional, TransactionHost } from '@nestjs-cls/transactional';
+import { TransactionalAdapterPrisma } from '@nestjs-cls/transactional-adapter-prisma';
+import dayjs from 'dayjs';
 import { SelectExpression, sql, ExpressionBuilder } from 'kysely';
 import { jsonArrayFrom } from 'kysely/helpers/postgres';
-import dayjs from 'dayjs';
-
-import { TResetPeriods, TUsersStatus, USERS_STATUS } from '@contract/constants';
 import { DB } from 'prisma/generated/types';
 
-import { TransactionalAdapterPrisma } from '@nestjs-cls/transactional-adapter-prisma';
-import { Transactional, TransactionHost } from '@nestjs-cls/transactional';
 import { Injectable, Logger } from '@nestjs/common';
 
-import { formatExecutionTime, getTime } from '@common/utils/get-elapsed-time';
-import { getKyselyUuid, paginateQuery } from '@common/helpers/kysely';
 import { TxKyselyService } from '@common/database/tx-kysely.service';
+import { getKyselyUuid, paginateQuery } from '@common/helpers/kysely';
+import { formatExecutionTime, getTime } from '@common/utils/get-elapsed-time';
 import { GetAllUsersCommand, GetUsersStreamCommand } from '@libs/contracts/commands';
 
 import { ConfigProfileInboundEntity } from '@modules/config-profiles/entities';
 
+import { BulkDeleteByStatusBuilder, BulkUpdateUserUsedTrafficBuilder } from '../builders';
+import { TriggerThresholdNotificationsBuilder } from '../builders/trigger-threshold-notifications-builder';
+import {
+    BaseUserEntity,
+    UserForConfigEntity,
+    UserEntity,
+    UserWithResolvedInboundEntity,
+} from '../entities';
+import { UserTrafficEntity } from '../entities/user-traffic.entity';
 import {
     IGetUserAccessibleNodes,
     IGetUserAccessibleNodesResponse,
@@ -23,15 +31,6 @@ import {
     IUserOnlineStats,
     IUserStats,
 } from '../interfaces';
-import {
-    BaseUserEntity,
-    UserForConfigEntity,
-    UserEntity,
-    UserWithResolvedInboundEntity,
-} from '../entities';
-import { TriggerThresholdNotificationsBuilder } from '../builders/trigger-threshold-notifications-builder';
-import { BulkDeleteByStatusBuilder, BulkUpdateUserUsedTrafficBuilder } from '../builders';
-import { UserTrafficEntity } from '../entities/user-traffic.entity';
 import { UserConverter } from '../users.converter';
 
 const USERS_FILTER_COLUMN_MAP = {

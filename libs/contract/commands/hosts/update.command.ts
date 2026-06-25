@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { HOSTS_ROUTES, REST_API } from '../../api';
 import {
     getEndpointDetails,
     SECURITY_LAYERS,
@@ -7,7 +8,6 @@ import {
     SUBSCRIPTION_TEMPLATE_TYPE,
     MIHOMO_IP_VERSION,
 } from '../../constants';
-import { HOSTS_ROUTES, REST_API } from '../../api';
 import { HostsSchema } from '../../models';
 
 export namespace UpdateHostCommand {

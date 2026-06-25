@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { getEndpointDetails } from '../../constants';
 import { NODES_ROUTES, REST_API } from '../../api';
+import { getEndpointDetails } from '../../constants';
 
 export namespace DeleteNodeCommand {
     export const url = REST_API.NODES.DELETE;

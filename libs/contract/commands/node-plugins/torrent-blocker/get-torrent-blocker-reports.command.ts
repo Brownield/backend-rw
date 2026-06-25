@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-import { TorrentBlockerReportSchema, TanstackQueryRequestQuerySchema } from '../../../models';
 import { REST_API, NODE_PLUGINS_ROUTES } from '../../../api';
 import { getEndpointDetails } from '../../../constants';
+import { TorrentBlockerReportSchema, TanstackQueryRequestQuerySchema } from '../../../models';
 
 export namespace GetTorrentBlockerReportsCommand {
     export const url = REST_API.NODE_PLUGINS.TORRENT_BLOCKER.GET_REPORTS;

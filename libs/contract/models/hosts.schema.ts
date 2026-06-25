@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { ALPN, MIHOMO_IP_VERSION, SECURITY_LAYERS } from '../constants/hosts';
 import { SUBSCRIPTION_TEMPLATE_TYPE } from '../constants';
+import { ALPN, MIHOMO_IP_VERSION, SECURITY_LAYERS } from '../constants/hosts';
 
 export const HostsSchema = z.object({
     uuid: z.string().uuid(),

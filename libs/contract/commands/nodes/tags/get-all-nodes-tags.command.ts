@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { getEndpointDetails } from '../../../constants';
 import { REST_API, NODES_ROUTES } from '../../../api';
+import { getEndpointDetails } from '../../../constants';
 
 export namespace GetAllNodesTagsCommand {
     export const url = REST_API.NODES.TAGS.GET;

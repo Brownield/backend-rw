@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-import { InfraBillingAvailableNodeSchema, InfraBillingNodeSchema } from '../../models';
 import { INFRA_BILLING_ROUTES, REST_API } from '../../api';
 import { getEndpointDetails } from '../../constants';
+import { InfraBillingAvailableNodeSchema, InfraBillingNodeSchema } from '../../models';
 
 export namespace CreateInfraBillingNodeCommand {
     export const url = REST_API.INFRA_BILLING.CREATE_BILLING_NODE;

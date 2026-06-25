@@ -4,8 +4,8 @@ import { JwtService } from '@nestjs/jwt';
 import { ok, TResult } from '@common/types';
 import { ROLE } from '@libs/contracts/constants';
 
-import { SignApiTokenCommand } from './sign-api-token.command';
 import { IJWTAuthPayload } from '../../interfaces';
+import { SignApiTokenCommand } from './sign-api-token.command';
 
 @CommandHandler(SignApiTokenCommand)
 export class SignApiTokenHandler implements ICommandHandler<SignApiTokenCommand, TResult<string>> {

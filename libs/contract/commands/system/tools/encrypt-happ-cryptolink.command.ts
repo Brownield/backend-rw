@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { getEndpointDetails } from '../../../constants';
 import { REST_API, SYSTEM_ROUTES } from '../../../api';
+import { getEndpointDetails } from '../../../constants';
 
 export namespace EncryptHappCryptoLinkCommand {
     export const url = REST_API.SYSTEM.TOOLS.ENCRYPT_HAPP_CRYPTO_LINK;

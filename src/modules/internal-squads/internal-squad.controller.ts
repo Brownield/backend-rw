@@ -1,3 +1,4 @@
+import { Body, Controller, HttpStatus, Param, UseFilters, UseGuards } from '@nestjs/common';
 import {
     ApiBearerAuth,
     ApiConflictResponse,
@@ -7,16 +8,16 @@ import {
     ApiParam,
     ApiTags,
 } from '@nestjs/swagger';
-import { Body, Controller, HttpStatus, Param, UseFilters, UseGuards } from '@nestjs/common';
 
+import { Endpoint } from '@common/decorators/base-endpoint/base-endpoint';
+import { Roles } from '@common/decorators/roles/roles';
+import { ApiScopeResource } from '@common/decorators/scopes';
 import { HttpExceptionFilter } from '@common/exception/http-exception.filter';
 import { JwtDefaultGuard } from '@common/guards/jwt-guards/def-jwt-guard';
-import { Endpoint } from '@common/decorators/base-endpoint/base-endpoint';
-import { errorHandler } from '@common/helpers/error-handler.helper';
-import { ApiScopeResource } from '@common/decorators/scopes';
-import { Roles } from '@common/decorators/roles/roles';
-import { ScopesGuard } from '@common/guards/scopes';
 import { RolesGuard } from '@common/guards/roles';
+import { ScopesGuard } from '@common/guards/scopes';
+import { errorHandler } from '@common/helpers/error-handler.helper';
+import { CONTROLLERS_INFO, INTERNAL_SQUADS_CONTROLLER } from '@libs/contracts/api';
 import {
     AddUsersToInternalSquadCommand,
     CreateInternalSquadCommand,
@@ -28,7 +29,6 @@ import {
     ReorderInternalSquadCommand,
     UpdateInternalSquadCommand,
 } from '@libs/contracts/commands';
-import { CONTROLLERS_INFO, INTERNAL_SQUADS_CONTROLLER } from '@libs/contracts/api';
 import { ROLE } from '@libs/contracts/constants';
 
 import {

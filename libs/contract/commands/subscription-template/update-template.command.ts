@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 import { REST_API, SUBSCRIPTION_TEMPLATE_ROUTES } from '../../api';
-import { SubscriptionTemplateSchema } from '../../models';
 import { getEndpointDetails } from '../../constants';
+import { SubscriptionTemplateSchema } from '../../models';
 
 export namespace UpdateSubscriptionTemplateCommand {
     export const url = REST_API.SUBSCRIPTION_TEMPLATE.UPDATE;

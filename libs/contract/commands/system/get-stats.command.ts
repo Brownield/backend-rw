@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { getEndpointDetails } from '../../constants';
 import { REST_API, SYSTEM_ROUTES } from '../../api';
+import { getEndpointDetails } from '../../constants';
 import { USERS_STATUS } from '../../constants';
 
 export namespace GetStatsCommand {

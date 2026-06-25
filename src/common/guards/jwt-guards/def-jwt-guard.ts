@@ -1,6 +1,6 @@
 import { ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { QueryBus } from '@nestjs/cqrs';
+import { AuthGuard } from '@nestjs/passport';
 
 import { RawCacheService } from '@common/raw-cache';
 import { TResult } from '@common/types';
@@ -10,10 +10,10 @@ import {
     ROLE,
 } from '@libs/contracts/constants';
 
-import { GetAdminByUsernameQuery } from '@modules/admin/queries/get-admin-by-username';
-import { GetTokenByUuidQuery } from '@modules/api-tokens/queries/get-token-by-uuid';
-import { ApiTokenEntity } from '@modules/api-tokens/entities/api-token.entity';
 import { AdminEntity } from '@modules/admin/entities/admin.entity';
+import { GetAdminByUsernameQuery } from '@modules/admin/queries/get-admin-by-username';
+import { ApiTokenEntity } from '@modules/api-tokens/entities/api-token.entity';
+import { GetTokenByUuidQuery } from '@modules/api-tokens/queries/get-token-by-uuid';
 import { IJWTAuthPayload } from '@modules/auth/interfaces';
 
 @Injectable()

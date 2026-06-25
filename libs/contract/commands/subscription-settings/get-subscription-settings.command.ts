@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 import { REST_API, SUBSCRIPTION_SETTINGS_ROUTES } from '../../api';
-import { SubscriptionSettingsSchema } from '../../models';
 import { getEndpointDetails } from '../../constants';
+import { SubscriptionSettingsSchema } from '../../models';
 
 export namespace GetSubscriptionSettingsCommand {
     export const url = REST_API.SUBSCRIPTION_SETTINGS.GET;

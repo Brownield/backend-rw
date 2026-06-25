@@ -1,15 +1,15 @@
+import { Module } from '@nestjs/common';
 import { DiscoveryModule } from '@nestjs/core';
 import { CqrsModule } from '@nestjs/cqrs';
-import { Module } from '@nestjs/common';
 
 import { PrismaModule } from '@common/database';
 
-import { ApiTokensRepository } from './repositories/api-tokens.repository';
 import { ApiTokensController } from './api-tokens.controllers';
-import { ScopeCatalogService } from './scope-catalog.service';
 import { ApiTokenConverter } from './api-tokens.converter';
 import { ApiTokensService } from './api-tokens.service';
 import { QUERIES } from './queries';
+import { ApiTokensRepository } from './repositories/api-tokens.repository';
+import { ScopeCatalogService } from './scope-catalog.service';
 
 @Module({
     imports: [CqrsModule, PrismaModule, DiscoveryModule],

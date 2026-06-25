@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { getEndpointDetails } from '../../constants';
 import { HWID_ROUTES, REST_API } from '../../api';
+import { getEndpointDetails } from '../../constants';
 
 export namespace GetTopUsersByHwidDevicesCommand {
     export const url = REST_API.HWID.TOP_USERS_BY_DEVICES;

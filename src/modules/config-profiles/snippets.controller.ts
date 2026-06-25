@@ -1,3 +1,4 @@
+import { Body, Controller, HttpStatus, UseFilters, UseGuards } from '@nestjs/common';
 import {
     ApiBearerAuth,
     ApiConflictResponse,
@@ -6,23 +7,22 @@ import {
     ApiOkResponse,
     ApiTags,
 } from '@nestjs/swagger';
-import { Body, Controller, HttpStatus, UseFilters, UseGuards } from '@nestjs/common';
 
-import { HttpExceptionFilter } from '@common/exception/http-exception.filter';
-import { JwtDefaultGuard } from '@common/guards/jwt-guards/def-jwt-guard';
-import { errorHandler } from '@common/helpers/error-handler.helper';
-import { ApiScopeResource } from '@common/decorators/scopes';
 import { Endpoint } from '@common/decorators/base-endpoint';
 import { Roles } from '@common/decorators/roles/roles';
-import { ScopesGuard } from '@common/guards/scopes';
+import { ApiScopeResource } from '@common/decorators/scopes';
+import { HttpExceptionFilter } from '@common/exception/http-exception.filter';
+import { JwtDefaultGuard } from '@common/guards/jwt-guards/def-jwt-guard';
 import { RolesGuard } from '@common/guards/roles';
+import { ScopesGuard } from '@common/guards/scopes';
+import { errorHandler } from '@common/helpers/error-handler.helper';
+import { CONTROLLERS_INFO, SNIPPETS_CONTROLLER } from '@libs/contracts/api';
 import {
     CreateSnippetCommand,
     DeleteSnippetCommand,
     GetSnippetsCommand,
     UpdateSnippetCommand,
 } from '@libs/contracts/commands';
-import { CONTROLLERS_INFO, SNIPPETS_CONTROLLER } from '@libs/contracts/api';
 import { ROLE } from '@libs/contracts/constants';
 
 import {

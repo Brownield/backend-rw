@@ -1,3 +1,4 @@
+import { Body, Controller, HttpStatus, Param, Query, UseFilters, UseGuards } from '@nestjs/common';
 import {
     ApiBearerAuth,
     ApiCreatedResponse,
@@ -7,17 +8,17 @@ import {
     ApiQuery,
     ApiTags,
 } from '@nestjs/swagger';
-import { Body, Controller, HttpStatus, Param, Query, UseFilters, UseGuards } from '@nestjs/common';
 
-import { HttpExceptionFilter } from '@common/exception/http-exception.filter';
-import { JwtDefaultGuard } from '@common/guards/jwt-guards/def-jwt-guard';
-import { errorHandler } from '@common/helpers/error-handler.helper';
 import { TypedConfigService } from '@common/config/app-config';
-import { ApiScopeResource } from '@common/decorators/scopes';
 import { Endpoint } from '@common/decorators/base-endpoint';
 import { Roles } from '@common/decorators/roles/roles';
-import { ScopesGuard } from '@common/guards/scopes';
+import { ApiScopeResource } from '@common/decorators/scopes';
+import { HttpExceptionFilter } from '@common/exception/http-exception.filter';
+import { JwtDefaultGuard } from '@common/guards/jwt-guards/def-jwt-guard';
 import { RolesGuard } from '@common/guards/roles';
+import { ScopesGuard } from '@common/guards/scopes';
+import { errorHandler } from '@common/helpers/error-handler.helper';
+import { CONTROLLERS_INFO, USERS_CONTROLLER } from '@libs/contracts/api';
 import {
     CreateUserCommand,
     DeleteUserCommand,
@@ -40,7 +41,6 @@ import {
     RevokeUserSubscriptionCommand,
     UpdateUserCommand,
 } from '@libs/contracts/commands';
-import { CONTROLLERS_INFO, USERS_CONTROLLER } from '@libs/contracts/api';
 import { ROLE } from '@libs/contracts/constants';
 
 import {
@@ -81,18 +81,18 @@ import {
     UpdateUserRequestDto,
     UpdateUserResponseDto,
 } from '../dtos';
+import { GetUserByEmailResponseDto } from '../dtos/get-user-by-email.dto';
+import { GetUserByEmailRequestDto } from '../dtos/get-user-by-email.dto';
+import {
+    GetUserByTelegramIdRequestDto,
+    GetUserByTelegramIdResponseDto,
+} from '../dtos/get-user-by-telegram-id.dto';
 import {
     GetAllTagsResponseModel,
     GetAllUsersResponseModel,
     GetFullUserResponseModel,
     GetUsersStreamResponseModel,
 } from '../models';
-import {
-    GetUserByTelegramIdRequestDto,
-    GetUserByTelegramIdResponseDto,
-} from '../dtos/get-user-by-telegram-id.dto';
-import { GetUserByEmailResponseDto } from '../dtos/get-user-by-email.dto';
-import { GetUserByEmailRequestDto } from '../dtos/get-user-by-email.dto';
 import { UsersService } from '../users.service';
 
 @ApiBearerAuth('Authorization')

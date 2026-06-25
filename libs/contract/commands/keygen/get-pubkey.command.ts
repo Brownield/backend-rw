@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { getEndpointDetails } from '../../constants';
 import { KEYGEN_ROUTES, REST_API } from '../../api';
+import { getEndpointDetails } from '../../constants';
 export namespace GetPubKeyCommand {
     export const url = REST_API.KEYGEN.GET;
     export const TSQ_url = url;

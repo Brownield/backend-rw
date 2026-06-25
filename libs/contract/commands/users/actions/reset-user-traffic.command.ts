@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
+import { REST_API, USERS_ROUTES } from '../../../api';
 import { getEndpointDetails } from '../../../constants';
 import { ExtendedUsersSchema } from '../../../models';
-import { REST_API, USERS_ROUTES } from '../../../api';
 
 export namespace ResetUserTrafficCommand {
     export const url = REST_API.USERS.ACTIONS.RESET_TRAFFIC;

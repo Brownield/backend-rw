@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
+import { REST_API, SYSTEM_ROUTES } from '../../../api';
 import { getEndpointDetails, RESPONSE_RULES_RESPONSE_TYPES } from '../../../constants';
 import { ResponseRuleSchema, ResponseRulesConfigSchema } from '../../../models';
-import { REST_API, SYSTEM_ROUTES } from '../../../api';
 
 export namespace TestSrrMatcherCommand {
     export const url = REST_API.SYSTEM.TESTERS.SRR_MATCHER;

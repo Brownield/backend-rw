@@ -3,13 +3,13 @@ import { Job } from 'bullmq';
 import { Processor, WorkerHost } from '@nestjs/bullmq';
 import { Logger, Optional } from '@nestjs/common';
 
-import { TelegramApiService } from '@integration-modules/notifications/telegram-bot/telegram-api.service';
 import { TelegramApiError } from '@integration-modules/notifications/telegram-bot/telegram-api.error';
+import { TelegramApiService } from '@integration-modules/notifications/telegram-bot/telegram-api.service';
 
-import { TelegramBotLoggerQueueService } from './telegram-bot-logger.service';
+import { QUEUES_NAMES } from '../../queue.enum';
 import { TelegramBotLoggerJobNames } from './enums';
 import { IMessageEventPayload } from './interfaces';
-import { QUEUES_NAMES } from '../../queue.enum';
+import { TelegramBotLoggerQueueService } from './telegram-bot-logger.service';
 
 @Processor(QUEUES_NAMES.NOTIFICATIONS.TELEGRAM, {
     concurrency: 100,

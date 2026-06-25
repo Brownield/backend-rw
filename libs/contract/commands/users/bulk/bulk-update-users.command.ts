@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { getEndpointDetails } from '../../../constants';
 import { REST_API, USERS_ROUTES } from '../../../api';
+import { getEndpointDetails } from '../../../constants';
 import { RESET_PERIODS } from '../../../constants';
 import { UsersSchema } from '../../../models';
 

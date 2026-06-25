@@ -1,8 +1,8 @@
-import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 
-import { TelegramApiService } from './telegram-api.service';
 import { TELEGRAM_BOT_EVENTS } from './events';
+import { TelegramApiService } from './telegram-api.service';
 
 @Module({
     imports: [ConfigModule],

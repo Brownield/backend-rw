@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-import { ApiTokensSchema } from '../../models/api-tokens.schema';
 import { REST_API, API_TOKENS_ROUTES } from '../../api';
 import { getEndpointDetails } from '../../constants';
+import { ApiTokensSchema } from '../../models/api-tokens.schema';
 
 export namespace FindAllApiTokensCommand {
     export const url = REST_API.API_TOKENS.GET;

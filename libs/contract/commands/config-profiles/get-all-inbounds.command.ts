@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 import { CONFIG_PROFILES_ROUTES, REST_API } from '../../api';
-import { ConfigProfileInboundsSchema } from '../../models';
 import { getEndpointDetails } from '../../constants';
+import { ConfigProfileInboundsSchema } from '../../models';
 
 export namespace GetAllInboundsCommand {
     export const url = REST_API.CONFIG_PROFILES.GET_ALL_INBOUNDS;

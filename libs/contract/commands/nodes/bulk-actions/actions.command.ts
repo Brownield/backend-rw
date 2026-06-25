@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { getEndpointDetails, NODES_BULK_ACTIONS } from '../../../constants';
 import { NODES_ROUTES, REST_API } from '../../../api';
+import { getEndpointDetails, NODES_BULK_ACTIONS } from '../../../constants';
 
 export namespace BulkNodesActionsCommand {
     export const url = REST_API.NODES.BULK_ACTIONS.ACTIONS;

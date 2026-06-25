@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 import { REST_API, SUBSCRIPTION_ROUTES } from '../../api';
-import { SubscriptionInfoSchema } from '../../models';
 import { getEndpointDetails } from '../../constants';
+import { SubscriptionInfoSchema } from '../../models';
 
 export namespace GetSubscriptionInfoByShortUuidCommand {
     export const url = REST_API.SUBSCRIPTION.GET_INFO;

@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { getEndpointDetails } from '../../../constants';
 import { HOSTS_ROUTES, REST_API } from '../../../api';
-import { UpdateHostCommand } from '../update.command';
+import { getEndpointDetails } from '../../../constants';
 import { HostsSchema } from '../../../models';
+import { UpdateHostCommand } from '../update.command';
 
 export namespace UpdateManyHostsCommand {
     export const url = REST_API.HOSTS.BULK.UPDATE;

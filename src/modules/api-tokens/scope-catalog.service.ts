@@ -1,8 +1,9 @@
 import { Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
-import { DiscoveryService, MetadataScanner, Reflector } from '@nestjs/core';
 import { PATH_METADATA } from '@nestjs/common/constants';
+import { DiscoveryService, MetadataScanner, Reflector } from '@nestjs/core';
 
 import { SCOPE_ENDPOINT, SCOPE_RESOURCE } from '@common/decorators/scopes';
+import { CONTROLLERS_INFO, ROOT } from '@libs/contracts/api';
 import {
     buildActionScope,
     buildEndpointScope,
@@ -12,7 +13,6 @@ import {
     SCOPE_ACTION,
     SCOPE_WILDCARD,
 } from '@libs/contracts/constants';
-import { CONTROLLERS_INFO, ROOT } from '@libs/contracts/api';
 
 import { IGroupedScopeCatalog, IScopeCatalogEntry, IResourceScopes } from './interfaces';
 

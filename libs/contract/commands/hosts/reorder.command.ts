@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { getEndpointDetails } from '../../constants';
 import { HOSTS_ROUTES, REST_API } from '../../api';
+import { getEndpointDetails } from '../../constants';
 import { HostsSchema } from '../../models';
 
 export namespace ReorderHostCommand {

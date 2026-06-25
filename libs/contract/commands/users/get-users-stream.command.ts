@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
+import { REST_API, USERS_ROUTES } from '../../api';
 import { getEndpointDetails } from '../../constants';
 import { ExtendedUsersSchema } from '../../models';
-import { REST_API, USERS_ROUTES } from '../../api';
 
 export namespace GetUsersStreamCommand {
     export const url = REST_API.USERS.STREAM;

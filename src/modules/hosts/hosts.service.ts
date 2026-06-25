@@ -1,19 +1,19 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 
-import { nullifyEmpty } from '@common/utils/convert-type';
 import { fail, ok, TResult } from '@common/types';
+import { nullifyEmpty } from '@common/utils/convert-type';
 import { ERRORS } from '@libs/contracts/constants';
 
-import { GetSubscriptionTemplateByUuidQuery } from '@modules/subscription-template/queries/get-template-by-uuid';
 import { GetConfigProfileByUuidQuery } from '@modules/config-profiles/queries/get-config-profile-by-uuid';
 import { ReorderHostRequestDto } from '@modules/hosts/dtos/reorder-hosts.dto';
+import { GetSubscriptionTemplateByUuidQuery } from '@modules/subscription-template/queries/get-template-by-uuid';
 
-import { DeleteHostResponseModel } from './models/delete-host.response.model';
 import { UpdateHostRequestDto, UpdateManyHostsRequestDto } from './dtos';
-import { HostsRepository } from './repositories/hosts.repository';
 import { CreateHostRequestDto } from './dtos/create-host.dto';
 import { HostsEntity } from './entities/hosts.entity';
+import { DeleteHostResponseModel } from './models/delete-host.response.model';
+import { HostsRepository } from './repositories/hosts.repository';
 
 @Injectable()
 export class HostsService {

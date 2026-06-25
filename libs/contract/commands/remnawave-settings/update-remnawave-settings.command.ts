@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { REMNAAWAVE_SETTINGS_ROUTES, REST_API } from '../../api';
+import { getEndpointDetails } from '../../constants';
 import {
     BrandingSettingsSchema,
     Oauth2SettingsSchema,
@@ -7,8 +9,6 @@ import {
     PasswordAuthSettingsSchema,
     RemnawaveSettingsSchema,
 } from '../../models';
-import { REMNAAWAVE_SETTINGS_ROUTES, REST_API } from '../../api';
-import { getEndpointDetails } from '../../constants';
 
 export namespace UpdateRemnawaveSettingsCommand {
     export const url = REST_API.REMNAAWAVE_SETTINGS.UPDATE;

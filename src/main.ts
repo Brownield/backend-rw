@@ -4,29 +4,28 @@
 
 process.title = 'rw-api';
 
-import { utilities as nestWinstonModuleUtilities, WinstonModule } from 'nest-winston';
-import { patchNestJsSwagger, ZodValidationPipe } from 'nestjs-zod';
+import { ROOT } from '@contract/api';
+import compression from 'compression';
+import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import timezone from 'dayjs/plugin/timezone';
-import { createLogger } from 'winston';
-import compression from 'compression';
-import * as winston from 'winston';
 import utc from 'dayjs/plugin/utc';
 import { json } from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import dayjs from 'dayjs';
+import { utilities as nestWinstonModuleUtilities, WinstonModule } from 'nest-winston';
+import { patchNestJsSwagger, ZodValidationPipe } from 'nestjs-zod';
+import { createLogger } from 'winston';
+import * as winston from 'winston';
 
-import { ROOT } from '@contract/api';
-
-import { NestExpressApplication } from '@nestjs/platform-express';
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
-import { getDocs, isDevelopment, isDevOrDebugLogsEnabled } from '@common/utils/startup-app';
-import { proxyCheckMiddleware, getRealIp, noRobotsMiddleware } from '@common/middlewares';
 import { TypedConfigService } from '@common/config/app-config/typed-config.service';
-import { getStartMessage } from '@common/utils/startup-app/get-start-message';
+import { proxyCheckMiddleware, getRealIp, noRobotsMiddleware } from '@common/middlewares';
 import { customLogFilter } from '@common/utils/filter-logs';
+import { getDocs, isDevelopment, isDevOrDebugLogsEnabled } from '@common/utils/startup-app';
+import { getStartMessage } from '@common/utils/startup-app/get-start-message';
 
 import { AppModule } from './app.module';
 

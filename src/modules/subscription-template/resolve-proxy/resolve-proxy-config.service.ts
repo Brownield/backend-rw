@@ -1,3 +1,5 @@
+import { filter, shuffle } from 'lodash';
+import { customAlphabet } from 'nanoid';
 import {
     GRPCConfig,
     HTTPUpgradeConfig,
@@ -9,26 +11,24 @@ import {
     TCPConfig,
     WebSocketConfig,
 } from 'xray-typed';
-import { filter, shuffle } from 'lodash';
-import { customAlphabet } from 'nanoid';
 
 import { Injectable } from '@nestjs/common';
 
+import { TypedConfigService } from '@common/config/app-config';
 import {
     resolveEncryptionFromDecryption,
     resolveInboundAndMlDsa65PublicKey,
     resolveInboundAndPublicKey,
 } from '@common/helpers/xray-config';
 import { getSsPassword, isSS2022MethodFromMethod } from '@common/helpers/xray-config/ss-cipher';
+import { getVlessFlow } from '@common/utils/flow';
 import { TemplateEngine } from '@common/utils/templates/replace-templates-values';
 import { setVlessRouteForUuid } from '@common/utils/vless-route';
-import { TypedConfigService } from '@common/config/app-config';
-import { getVlessFlow } from '@common/utils/flow';
 import { SECURITY_LAYERS, USERS_STATUS } from '@libs/contracts/constants';
 
-import { SubscriptionSettingsEntity } from '@modules/subscription-settings/entities/subscription-settings.entity';
-import { HostWithRawInbound } from '@modules/hosts/entities/host-with-inbound-tag.entity';
 import { ExternalSquadEntity } from '@modules/external-squads/entities';
+import { HostWithRawInbound } from '@modules/hosts/entities/host-with-inbound-tag.entity';
+import { SubscriptionSettingsEntity } from '@modules/subscription-settings/entities/subscription-settings.entity';
 import { UserEntity } from '@modules/users/entities';
 
 import {

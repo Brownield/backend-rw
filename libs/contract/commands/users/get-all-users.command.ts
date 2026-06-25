@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-import { ExtendedUsersSchema, TanstackQueryRequestQuerySchema } from '../../models';
-import { getEndpointDetails } from '../../constants';
 import { REST_API, USERS_ROUTES } from '../../api';
+import { getEndpointDetails } from '../../constants';
+import { ExtendedUsersSchema, TanstackQueryRequestQuerySchema } from '../../models';
 
 export namespace GetAllUsersCommand {
     export const url = REST_API.USERS.GET;

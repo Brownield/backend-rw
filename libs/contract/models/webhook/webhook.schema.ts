@@ -1,8 +1,8 @@
 import z from 'zod';
 
 import { EVENTS, EVENTS_SCOPES, toZodEnum, CRUD_ACTIONS } from '../../constants';
-import { HwidUserDeviceSchema } from '../hwid-user-device.schema';
 import { ExtendedUsersSchema } from '../extended-users.schema';
+import { HwidUserDeviceSchema } from '../hwid-user-device.schema';
 import { NodesSchema } from '../nodes.schema';
 
 export const RemnawaveWebhookUserEvents = z.object({

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { getEndpointDetails } from '../../../constants';
 import { NODES_ROUTES, REST_API } from '../../../api';
+import { getEndpointDetails } from '../../../constants';
 import { NodesSchema } from '../../../models';
 
 export namespace EnableNodeCommand {
