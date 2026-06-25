@@ -271,7 +271,7 @@ export class ConfigProfileRepository {
         return true;
     }
 
-    /* 
+    /*
 
     Kysely helpers
 
