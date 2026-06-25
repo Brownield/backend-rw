@@ -69,6 +69,17 @@ export const RemnawaveWebhookServiceEvents = z.object({
             })
 
             .optional(),
+        apiToken: z
+            .object({
+                name: z.string(),
+                uuid: z.string().uuid(),
+                expireAt: z
+                    .string()
+                    .datetime()
+                    .transform((str) => new Date(str)),
+                scopes: z.array(z.string()),
+            })
+            .optional(),
     }),
 });
 
