@@ -206,6 +206,7 @@ export class ResolveProxyConfigService {
                     streamSettings.hysteriaSettings,
                     authOptions.vlessUuid,
                     protocol,
+                    inputHost.vlessRouteId,
                 );
             default:
                 return {
@@ -339,12 +340,20 @@ export class ResolveProxyConfigService {
         settings: HysteriaConfig | undefined,
         vlessUuid: string,
         protocol: ProtocolVariant,
+        vlessRouteId: number | null,
     ): HysteriaTransport {
+        let auth: string = '';
+        if (protocol.protocol === 'hysteria') {
+            auth = setVlessRouteForUuid(vlessUuid, vlessRouteId);
+        } else if (settings?.auth) {
+            auth = settings.auth;
+        }
+
         return {
             transport: 'hysteria',
             transportOptions: {
                 version: 2,
-                auth: protocol.protocol !== 'hysteria' ? vlessUuid : (settings?.auth ?? vlessUuid),
+                auth,
             },
         };
     }
