@@ -128,6 +128,24 @@ export const ResponseRuleModificationsSchema = z
                     'Encrypt response body with given parameters. Generate keypairs with Rescue CLI: `docker exec -it remnawave cli`, select "Generate keypairs".',
             }),
         ),
+        excludeHostsByTags: z
+            .array(
+                z
+                    .string()
+                    .regex(
+                        /^[A-Z0-9_:]+$/,
+                        'Tag can only contain uppercase letters, numbers, underscores and colons',
+                    )
+                    .max(36, 'Each tag must be less than 36 characters'),
+            )
+            .min(1)
+            .optional()
+            .describe(
+                JSON.stringify({
+                    markdownDescription:
+                        'Excludes hosts from the subscription output if at least one tag in the host matches the given tags.',
+                }),
+            ),
     })
     .optional()
     .describe(
